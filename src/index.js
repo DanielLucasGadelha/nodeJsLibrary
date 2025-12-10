@@ -16,17 +16,26 @@ function breakInToParagraphs(text) {
        const paragraphs = text
        .toLowerCase()
        .split('\n');
-       const count = paragraphs.map((paragraph) => {
+       const count = paragraphs.flatMap((paragraph) => {
+        if(!paragraph) return [];
         return verifyTwicedWords(paragraph);
        })
        console.log(count)
+}
+
+function cleanWords(word){
+        return word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+
 }
 
 function verifyTwicedWords(text) {
         const wordsArray = text.split(' ');
         const results = {};
         wordsArray.forEach(word => {
-                results[word] = (results[word] || 0) + 1;
+                if (word.length >= 3){
+                const cleanedWords = cleanWords(word)
+                results[cleanedWords] = (results[cleanedWords] || 0) + 1;
+                }
         })
         return results;
 }
