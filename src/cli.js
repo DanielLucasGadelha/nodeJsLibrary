@@ -1,6 +1,7 @@
 import fs from 'fs'
 import dealErrors from './Erros/funcoesErro.js';
 import { countWords } from './index.js';
+import { mountOutputArchive } from './helpers.js';  
 
 const pathFile = process.argv; 
 const link = pathFile[2];
@@ -18,12 +19,12 @@ try {
 
 async function createAndSaveArchive(wordsArray, addres){
     const newArchive = `${addres}/resultado.txt`;
-    const textWords = JSON.stringify(wordsArray);
+    const textWords = mountOutputArchive(wordsArray);
     try {
         await fs.promises.writeFile(newArchive, textWords);
         console.log('Arquivo Criado')
     } catch(err){
         throw err;
     }
-
 }
+
