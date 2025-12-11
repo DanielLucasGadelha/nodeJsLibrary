@@ -1,4 +1,4 @@
-function dealErrors(err){
+export default function dealErrors(err){
     if (err.code === 'ENOENT') {
         throw new Error ('Arquivo não encontrado');
     } else {
@@ -7,4 +7,3 @@ function dealErrors(err){
 
 }
 
-module.exports = dealErrors

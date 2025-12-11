@@ -1,24 +1,10 @@
-const fs = require('fs');
-const dealErrors = require('./Erros/funcoesErro');
-const pathFile = process.argv; 
-const link = pathFile[2];
-
-fs.readFile(link, 'utf8', (err, text) => {
-try {
-        if (err) throw err
-        countWords(text);
-} catch(err) {
-        dealErrors(err);
-}
-})
-
-function countWords(text) {
+export function countWords(text) {
         const paragraphs = extractParagraphs(text)
         const count = paragraphs.flatMap((paragraph) => {
         if(!paragraph) return [];
         return verifyTwicedWords(paragraph);
        })
-       console.log(count)
+       return count;
 }
 
 function extractParagraphs(text) {
