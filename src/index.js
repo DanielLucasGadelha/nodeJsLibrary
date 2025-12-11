@@ -1,26 +1,28 @@
 const fs = require('fs');
-
+const dealErrors = require('./Erros/funcoesErro');
 const pathFile = process.argv; 
 const link = pathFile[2];
 
 fs.readFile(link, 'utf8', (err, text) => {
-        breakInToParagraphs(text);
-        //verifyTwicedWords(text);
-});
+try {
+        if (err) throw err
+        countWords(text);
+} catch(err) {
+        dealErrors(err);
+}
+})
 
-// Creat an array with words
-//count the ocorrences of each word
-//make an object with the results
-
-function breakInToParagraphs(text) {
-       const paragraphs = text
-       .toLowerCase()
-       .split('\n');
-       const count = paragraphs.flatMap((paragraph) => {
+function countWords(text) {
+        const paragraphs = extractParagraphs(text)
+        const count = paragraphs.flatMap((paragraph) => {
         if(!paragraph) return [];
         return verifyTwicedWords(paragraph);
        })
        console.log(count)
+}
+
+function extractParagraphs(text) {
+     return  text.toLowerCase().split('\n');   
 }
 
 function cleanWords(word){
