@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/DanielLucasGadelha/nodeJsLibrary/issues"
   },
-  "homepage": "https://github.com/DanielLucasGadelha/nodeJsLibrary#readme"
+  "homepage": "https://github.com/DanielLucasGadelha/nodeJsLibrary#readme",
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
 }
