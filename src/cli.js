@@ -4,6 +4,7 @@ import dealErrors from './Erros/funcoesErro.js';
 import { countWords } from './index.js';
 import { mountOutputArchive } from './helpers.js';  
 import { Command } from 'commander';
+import  chalk  from 'chalk';
 
 const program = new Command();
 
@@ -15,7 +16,7 @@ program
         const {text, destiny} = options; 
 
         if (!text || !destiny) {
-            console.error("erro: favor inserir caminho de origem e destino", error)
+            console.error(chalk.red("erro: favor inserir caminho de origem e destino", error));
             program.help();
             return
         }
@@ -25,7 +26,7 @@ program
 
         try{    
             processArchive(pathText, pathDestiny);
-            console.log('Texto processado')
+            console.log(chalk.green('Texto processado'))
         } catch(err) {
             console.log('error ocurred', err)
 
@@ -44,9 +45,6 @@ try {
     }
 })
 }
-
-
-
 async function createAndSaveArchive(wordsArray, addres){
     const newArchive = `${addres}/resultado.txt`;
     const textWords = mountOutputArchive(wordsArray);
